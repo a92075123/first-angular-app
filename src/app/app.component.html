@@ -3,7 +3,7 @@
   <ul id="users">
     @for (user of users ; track user.id) {
       <li>
-        <app-user [user] = "user" (select) = "onSelectUser($event)"></app-user>
+        <app-user [user] = "user" [selected]="user.id === lockUser" (select) = "onSelectUser($event)"></app-user>
       </li>
     }
     <!--舊版 for-->
@@ -11,12 +11,10 @@
 <!--      <app-user [user] = "user" (select) = "onSelectUser($event)"></app-user>-->
 <!--    </li>-->
   </ul>
-
-
   @if (lockUser) {
-    <app-task [name] = "selectedUser.name" />
+    <app-tasks [userId]="selectedUser.id"  [name] = "selectedUser.name" />
   } @else {
-    <p id="fallback">Please select a user.</p>
+    <p>Please select a user.</p>
   }
     <!--舊版 if else-->
 <!--  <app-task *ngIf="lockUser; else fallback"  [name] = "selectedUser!.name" />-->

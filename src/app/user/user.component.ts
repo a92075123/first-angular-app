@@ -1,5 +1,6 @@
 import {Component, computed, signal , Input , input, Output,output,EventEmitter} from '@angular/core';
-
+import {User} from './user.model';
+import {CardComponent} from '../shared/card/card.component';
 // import { DUMMY_USERS } from '../dummy-users';
 // const randomIndex = Math.floor(Math.random() * DUMMY_USERS.length)
 
@@ -9,16 +10,13 @@ import {Component, computed, signal , Input , input, Output,output,EventEmitter}
 //   avatar: string;
 // }
 
-interface User {
-  id: string;
-  name: string;
-  avatar: string;
-}
-
 @Component({
   selector: 'app-user',
-  standalone: true ,
+  standalone: true,
   templateUrl: './user.component.html',
+  imports: [
+    CardComponent
+  ],
   styleUrl: './user.component.css'
 })
 /**
@@ -46,6 +44,7 @@ export class UserComponent {
   // @Input({required: true}) avatar!:String;
   // @Input({required: true}) name!:String;
   @Input({required: true}) user!:User;
+  @Input({required: true}) selected!:boolean;
   @Output() select = new EventEmitter();
   /**
    * 第二種input方法
